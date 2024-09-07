@@ -1,0 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap');
+
+body {
+    font-family: 'Suse', sans-serif;
+    display: flexbox;
+    margin-left: 2rem;
+}
