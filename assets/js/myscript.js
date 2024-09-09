@@ -29,7 +29,7 @@ var dental = [
 
 //Agregar código para el desafio 2 aquí
 
-//2.1 - agregar horas a arreglo de Traumatología
+// 2.1 - agregar horas a arreglo de Traumatología
 
 // Convierto nueva data a un array
 var newTraumatologiaData = [
@@ -40,15 +40,15 @@ var newTraumatologiaData = [
     {hora: '12:00', especialista: 'MATIAS ARAVENA', paciente: 'SUSANA POBLETE', rut: '14345656-6', prevision: 'FONASA'},
 ];
 
-//Alt. A) Agrego la nueva data usando el método Concat, para tener un nuevo arreglo que combine ambos, sin perder la data original
+// Alt. A) Agrego la nueva data usando el método Concat, para tener un nuevo arreglo que combine ambos, sin perder la data original
 /*traumatologia = traumatologia.concat(newTraumatologiaData);*/
 
-//Alt. B)  Adding the new data to the traumatologia array using push
+// Alt. B)  Adding the new data to the traumatologia array using push
 for (var i = 0; i < newTraumatologiaData.length; i++) {
     traumatologia.push(newTraumatologiaData[i]);
 }
 
-//Actualizo listados anteriores
+// Actualizo listados anteriores
 document.write('<h3>(Update) Cantidad de pacientes por especialidad</h3>');
 document.write(`<li>Cantidad de atenciones para Radiología: ${radiologia.length}</li>`);
 document.write(`<li>Cantidad de atenciones para Traumatología: ${traumatologia.length}</li>`);
@@ -59,7 +59,7 @@ document.write(`<li>Primera atencion: ${radiologia[0].paciente} - ${radiologia[0
 document.write(`<li>Primera atencion: ${traumatologia[0].paciente} - ${traumatologia[0].prevision} | Última atención: ${traumatologia[traumatologia.length -1].paciente} - ${traumatologia[traumatologia.length -1].prevision}.</li>`);
 document.write(`<li>Primera atencion: ${dental[0].paciente} - ${dental[0].prevision} | Última atención: ${dental[dental.length -1].paciente} - ${dental[dental.length -1].prevision}.</li>`);
 
-//2.2 - Elimino el 1er y último elemento del arreglo de Radiología, sin perder el original
+// 2.2 - Elimino el 1er y último elemento del arreglo de Radiología, sin perder el original
 
 //☝🏻Copia de seguridad para no perder datos, trabajo sobre ella
 var newRadiologia = radiologia.slice(); // Create a shallow copy to avoid mutating the original array
@@ -70,10 +70,10 @@ newRadiologia.pop();   // quito el último elemento
 //Actualizo el listado de Radiología
 document.write('<h3>(Update) Radiología (sin primer y último paciente)</h3>');
 for (var i = 0; i < newRadiologia.length; i++) {
-    document.write(`<li>${newRadiologia[i].hora} - ${newRadiologia[i].especialista} - ${newRadiologia[i].paciente} - ${newRadiologia[i].rut} - ${newRadiologia[i].prevision}</li>`);
+    document.write(`<li>${newRadiologia[i].hora} - ${newRadiologia[i].paciente} - ${newRadiologia[i].rut} - ${newRadiologia[i].prevision}</li>`);
 }
 
-//2.3 - Re-estilizando listado de atenciones de Dental
+// 2.3 - Re-estilizando listado de atenciones de Dental
 
 // Copia del array 'Dental'
 var newDental = dental.slice(); // Create a shallow copy to avoid mutating the original array
@@ -81,26 +81,50 @@ var newDental = dental.slice(); // Create a shallow copy to avoid mutating the o
 //Re-escribo listado de pacientes
 document.write('<h3>(Update) Lista de pacientes para Dental</h3>');
 for (var i = 0; i < newDental.length; i++) {
-    var entry = `${newDental[i].hora} - ${newDental[i].especialista} - ${newDental[i].paciente} - ${newDental[i].rut} - ${newDental[i].prevision}`;
+    var entry = `${newDental[i].hora} - ${newDental[i].paciente} - ${newDental[i].rut} - ${newDental[i].prevision}`;
     document.write(`<p>${entry}</p>`);
 }
 
-//2.4 - Listado de todas las atenciones
+// 2.4 - Listado de todas las atenciones
+
 
 // Nuevo arreglo tomando todas las actualizaciones de arreglos
-var allSpecialties = newRadiologia.concat(updatedTraumatologia, dental);
+var allSpecialties = newRadiologia.concat(traumatologia, dental);
 
 // Imprimo el listado
 document.write('<h3>(Updated) Lista de todos los pacientes</h3>');
 for (var i = 0; i < allSpecialties.length; i++) {
-    var entry = `${allSpecialties[i].hora} - ${allSpecialties[i].especialista} - ${allSpecialties[i].paciente} - ${allSpecialties[i].rut} - ${allSpecialties[i].prevision}`;
+    var entry = `${allSpecialties[i].hora} - ${allSpecialties[i].paciente} - ${allSpecialties[i].rut} - ${allSpecialties[i].prevision}`;
     document.write(`<p>${entry}</p>`);
 }
 
+// 2.5 - Filtro de pacientes de dental cuya previsión es "Isapre"
 
-//Agregar código para el desafio 2 aquí
+var isapreDental = dental.filter(function(appointment) {
+    return appointment.prevision === 'ISAPRE';
+});
 
-document.write('<h3>Cantidad de pacientes por especialidad</h3>');
+document.write('<h3> (Fitro) Pacientes de Dental con previsión ISAPRE</h3>');
+for (var i = 0; i < isapreDental.length; i++) {
+    var entry = `${isapreDental[i].paciente} - ${isapreDental[i].rut} - ${isapreDental[i].prevision}`;
+    document.write(`<p>${entry}</p>`);
+}
+
+// 2.6 - Filtro de pacientes de traumatología cuya previsión es "Fonasa"
+
+var fonasaTraumatologia = newTraumatologiaData.filter(function(appointment) {
+    return appointment.prevision === 'FONASA';
+});
+
+document.write('<h3>(Filtro) Pacientes de Traumatología con previsión FONASA</h3>');
+for (var i = 0; i < fonasaTraumatologia.length; i++) {
+    var entry = `${fonasaTraumatologia[i].hora}- ${fonasaTraumatologia[i].paciente} - ${fonasaTraumatologia[i].rut} - ${fonasaTraumatologia[i].prevision}`;
+    document.write(`<p>${entry}</p>`);
+}
+
+//Agregar código para el desafio 2 aquí // --> no entendí por qué se estructuraba así el código, con un espacio al medio para mis respuestas 
+
+document.write('<hr><h3>Cantidad de pacientes por especialidad</h3>');
 document.write(`<li>Cantidad de atenciones para Radiología: ${radiologia.length}</li>`);
 document.write(`<li>Cantidad de atenciones para Traumatología: ${traumatologia.length}</li>`);
 document.write(`<li>Cantidad de atenciones para Dental: ${dental.length}</li>`);
